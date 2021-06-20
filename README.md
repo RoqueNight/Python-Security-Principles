@@ -16,3 +16,8 @@ The following Python fucntions() can be abused to execute code, exfiltrate data,
 - Jinja2/Tornado 
 - PyYaml 
 
+os.system()
+
+Allows the Python script/program to execute shell commands on the underlying OS. Below is a basic example of how this fcuntion() can be used.
+
+
