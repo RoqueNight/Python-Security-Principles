@@ -146,8 +146,6 @@ Input: __import__('os').system.listdir()
 ```
 Vulnerable Web app passes user-input to exec()
 ```
-import pickle
-import base64
 from flask import Flask, request
 
 app = Flask(__name__)
