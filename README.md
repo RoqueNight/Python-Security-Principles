@@ -90,3 +90,63 @@ Web app breakdown:
 | os.system() | Function that allows the execution of shell commands |
 | request | Parameter in the /api route that accepts input via HTTP POST requests |
 | print(data) | Print the input received via the web API route , wrapped around os.system() that allows code execution |
+
+| Function | Description | Misconfiguration |
+| :---: | :---: | :---: |
+| eval() | Function in Python that takes strings and execute them as arithmetic functions such as integer values | If a Web paramater accepts user-controlled data that doesn't get escaped and filtered and passes it to eval(), it will attempt to execute the input received as an arithmetic function that could lead to the creation of subprocess for code execution |
+
+The following code acts as a simple calculator that uses eval() to do arithmetic function
+```
+compute = input('\nYour expression? => ')
+if not compute:
+print ("No input")
+else:
+print ("Result =", eval(comp))
+```
+Giving the program the below output , it will do a calculation to calculate the result using the eval() function
+```
+Input: 2*3
+Program output: 6
+```
+Exploiting the code by giving the program untrusted input
+```
+Input: __import__(‘os’).system(‘whoami’) 
+Output: root
+```
+If the os.system() is blacklisted, the below method can also be used to execute code
+```
+Input: __import__('os').popen("whoami).read()
+Output: root
+```
+Secure Code 
+
+The follwoing code includes the validate() fucntion to ensure that only numbers and arithmetic expressions are allowed
+```
+compute = input('\nYour expression? => ')
+if not compute :
+print ("No input")
+else:
+if validate(compute):
+print ("Result =", eval(comp))
+else:
+print ("Error")
+```
+| Function | Description | Misconfiguration |
+| :---: | :---: | :---: |
+| exec() | Method executes the Python code block passed as a string or a code object | If a Web paramater accepts user-controlled data that doesn't get escaped and filtered and passes it to exec(), the attacker could supply python logic as part of the user input to abuse the exec() function if it does not get validated |
+
+The following code takes input and passes it to exec()
+```
+code = input('What command(s) in python did you learn today?')
+exec(code)
+```
+Exploiting the code , we can pass valid python logic to exec(). This can also be validated by using the validate() function
+```
+Input: __import__('os').system.listdir() 
+```
+Web app passes user-input to exec()
+```
+
+
+```
+
